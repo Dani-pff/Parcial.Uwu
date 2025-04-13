@@ -8,7 +8,7 @@ def menu_clientes():
   print("0. volver al menú principal")
   return int(input("Selecciona una opcion valida"))
 
-def registrar_clientes():
+def registrar_cliente():
   nombre = input("Nombre del cliente: ")
   id = input("identificación: ")
   telefono = input("telefono: ")
@@ -22,8 +22,23 @@ def buscar_cliente(id,clientes):
   return None 
 
 def actualizar_cliente(id,clientes):
-  for i 
+  for i, cliente in enumerate(clientes): # recorre la lista y enumerate obtiene la posicion del cliente y su tupla 
+    if cliente[1] == id: 
+      print("ingrese nuevos datos:")
+      clientes[i] = registrar_cliente() # remplazo de la tupla
+      print("cliente actualizado")
+      return # retorno temprano
+    print("cliente no encontrado.")
   
+def eliminar_cliente(id, clientes, bienes):
+    for cliente in clientes:
+        if cliente[1] == id:
+            clientes.remove(cliente)
+            if id in bienes:
+                del bienes[id]
+            print("Cliente eliminado.")
+            return
+    print("Cliente no encontrado.")
 
 
 
@@ -37,7 +52,7 @@ def actualizar_cliente(id,clientes):
 # zona de codigo principal
 
 clientes = [] #lista
-bienes =        #
+bienes =  []
 while true:
   print("Menú principal")
   print("1. gestión de los clientes")
@@ -47,9 +62,30 @@ while true:
   match opcion:
   case 1:
     while true:
-    print("")
-    print("")
-    print("")
+      opc= menu_clientes()
+      match opc:
+         case 1:
+            cliente = registrar_cliente()
+            clientes.append(cliente)
+            print("Cliente registrado.")
+          case 2:
+            id = input("Ingrese identificación del cliente: ")
+            cliente = buscar_cliente(id, clientes)
+            print(cliente if cliente else "Cliente no encontrado.")
+          case 3:
+            id = input("Identificación del cliente a actualizar: ")
+            actualizar_cliente(id, clientes)
+          case 4:
+            id = input("Identificación del cliente a eliminar: ")
+            eliminar_cliente(id, clientes, bienes)
+          case 0:
+            break
+          case _:
+            print("opción no valida.")
+   case 2:       
+            
+            
+         
 
 
   
